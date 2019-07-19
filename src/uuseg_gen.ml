@@ -52,4 +52,7 @@ let of_chars ~boundary ~chars =
   of_bounded_gen (bounded_gen boundary chars)
 
 let of_decoder_exn ~boundary ~decoder =
-  of_chars ~boundary ~chars:(Uutf_gen.char_gen_exn_of_decoder decoder)
+  of_chars ~boundary ~chars:(Uutf_gen.to_raw ~decoder)
+
+let of_decoder_replacing ~boundary ~decoder =
+  of_chars ~boundary ~chars:(Uutf_gen.to_replacing ~decoder)

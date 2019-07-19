@@ -11,6 +11,10 @@ all:
 check:
 	dune build @check
 
+# Build documentation
+doc:
+	dune build @doc
+
 # Build and run tests
 test:
 	dune runtest
