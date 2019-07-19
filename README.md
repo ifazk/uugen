@@ -4,6 +4,11 @@ Convert uutf and uuseg decoders into generators.
 # Documentation
 The API documentation can be found [here](https://ifazk.github.io/uugen/).
 
+# Installation
+You can install the packing using opam with:
+
+    opam pin uugen https://github.com/ifazk/uugen.git
+
 ## Public Domain
 Written in 2019 by Ifaz Kabir
 
