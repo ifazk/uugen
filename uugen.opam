@@ -10,6 +10,7 @@ maintainer: ["ifazk@users.noreply.github.com"]
 authors: ["Ifaz Kabir"]
 bug-reports: "https://github.com/ifazk/uugen/issues"
 homepage: "https://github.com/ifazk/uugen"
+doc: "https://ifazk.github.io/uugen/"
 license: "CC0-1.0"
 version: "0.1.0"
 dev-repo: "git+https://github.com/ifazk/uugen.git"
