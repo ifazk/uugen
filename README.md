@@ -1,6 +1,9 @@
 # Uugen - Generators for uutf and uuseg
 Convert uutf and uuseg decoders into generators.
 
+# Documentation
+The API documentation can be found [here](https://ifazk.github.io/uugen/).
+
 ## Public Domain
 Written in 2019 by Ifaz Kabir
 
