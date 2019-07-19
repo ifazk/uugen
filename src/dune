@@ -1,0 +1,5 @@
+(library
+ (name uugen)
+ (public_name uugen)
+ (libraries uutf uuseg gen)
+)
