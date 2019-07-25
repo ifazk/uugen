@@ -1,5 +1,9 @@
 (** Tests for [Uutf_gen] *)
 
+let fail_test str : unit =
+  let msg = Printf.sprintf "test %s failed" str in
+  failwith msg
+
 let abc = "abc"
 let abc_list = Uchar.[of_char 'a'; of_char 'b'; of_char 'c']
 
@@ -32,11 +36,33 @@ let test3 () =
   else
     failwith "test3 failed"
 
-let () =
-  ( test1 ()
-  ; test2 ()
-  ; test3 ()
-  )
+(** Tests for convenience functions in Uutf_gen *)
+let test7 () =
+  let open Uugen.Uutf_gen.Utf8.String in
+  let chars = to_raw abc in
+  let list = Gen.to_list chars in
+  if list = abc_list then
+    ()
+  else
+    failwith "test7 failed"
+
+let test8 () =
+  let open Uugen.Uutf_gen.Utf8.String in
+  let chars = to_raw abc_mal in
+  try
+    let _ = Gen.to_list chars in
+    failwith "test8 failed"
+  with
+  | Uugen.Uutf_gen.Malformed _ -> ()
+
+let test9 () =
+  let open Uugen.Uutf_gen.Utf8.String in
+  let chars = to_replacing abc_mal in
+  let list = Gen.to_list chars in
+  if list = abc_rep_list then
+    ()
+  else
+    failwith "test9 failed"
 
 (** Tests for [Uuseg_gen] *)
 
@@ -83,7 +109,13 @@ let test6 () =
   | Uugen.Uutf_gen.Malformed _ -> ()
 
 let () =
-  ( test4 ()
+  ( test1 ()
+  ; test2 ()
+  ; test3 ()
+  ; test4 ()
   ; test5 ()
   ; test6 ()
+  ; test7 ()
+  ; test8 ()
+  ; test9 ()
   )

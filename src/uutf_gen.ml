@@ -58,3 +58,40 @@ let to_replacing ~(decoder: Uutf.decoder): raw =
     | `Malformed _ -> Some Uutf.u_rep
   in
   gen
+
+module Utf8 = struct
+  let decoder ?nln ~src =
+    Uutf.decoder ?nln ~encoding:`UTF_8 src
+
+  let safe_of_auto ?nln ~(src:[< `Channel of in_channel | `String of string ]) =
+    safe_of_auto ~decoder:(decoder ?nln ~src)
+
+  let to_raw ?nln ~src : raw =
+    to_raw ~decoder:(decoder ?nln ~src)
+
+  let to_replacing ?nln ~src : raw =
+    to_replacing ~decoder:(decoder ?nln ~src)
+
+  module String = struct
+    let to_safe ?nln str =
+      safe_of_auto ?nln ~src:(`String str)
+
+    let to_raw ?nln str : raw =
+      to_raw ?nln ~src:(`String str)
+
+    let to_replacing ?nln str : raw =
+      to_replacing ?nln ~src:(`String str)
+  end
+
+  module Channel = struct
+    let to_safe ?nln chan =
+      safe_of_auto ?nln ~src:(`Channel chan)
+
+    let to_raw ?nln chan : raw =
+      to_raw ?nln ~src:(`Channel chan)
+
+    let to_replacing ?nln chan : raw =
+      to_replacing ?nln ~src:(`Channel chan)
+  end
+
+end
