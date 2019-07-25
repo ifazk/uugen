@@ -2,7 +2,7 @@
 (generate_opam_files true)
 
 (name uugen)
-(version 0.1.0)
+(version 0.1.1)
 (source (github ifazk/uugen))
 (license CC0-1.0)
 (authors "Ifaz Kabir")
