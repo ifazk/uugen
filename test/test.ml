@@ -108,6 +108,22 @@ let test6 () =
   with
   | Uugen.Uutf_gen.Malformed _ -> ()
 
+(** Tests for convenience functions in Uuseg_gen *)
+
+let abcr_list =
+  Uchar.[(of_char 'a'); (of_char 'b'); (of_char 'c'); Uutf.u_rep]
+  |> List.map (fun c -> `LastUchar c)
+let abcr_abcr_list = abcr_list @ space_list @ abcr_list
+
+let test10 () =
+  let open Uugen.Uuseg_gen.Grapheme_cluster in
+  let gen = Utf8.of_string_replacing abc_mal_abc_mal in
+  let list = Gen.to_list gen in
+  if list = abcr_abcr_list then
+    ()
+  else
+    failwith "test10 failed"
+
 let () =
   ( test1 ()
   ; test2 ()
@@ -118,4 +134,5 @@ let () =
   ; test7 ()
   ; test8 ()
   ; test9 ()
+  ; test10 ()
   )

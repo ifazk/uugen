@@ -56,3 +56,34 @@ let of_decoder_exn ~boundary ~decoder =
 
 let of_decoder_replacing ~boundary ~decoder =
   of_chars ~boundary ~chars:(Uutf_gen.to_replacing ~decoder)
+
+module Grapheme_cluster = struct
+  (** This module includes some convenience functions for working with Grapheme
+     cluster boundaries. *)
+
+  let of_chars ~chars =
+    of_chars ~boundary:`Grapheme_cluster ~chars
+
+  let of_decoder_exn ~decoder =
+    of_decoder_exn ~boundary:`Grapheme_cluster ~decoder
+
+  let of_decoder_replacing ~decoder =
+    of_decoder_replacing ~boundary:`Grapheme_cluster ~decoder
+
+  module Utf8 = struct
+    (** This module includes some convenience functions for working with utf8
+       encoded strings and channels and Grapheme cluster boundaries. *)
+
+    let of_string_exn ?nln str =
+      of_decoder_exn ~decoder:(Uutf.decoder ?nln ~encoding:`UTF_8 (`String str))
+
+    let of_string_replacing ?nln str =
+      of_decoder_replacing ~decoder:(Uutf.decoder ?nln ~encoding:`UTF_8 (`String str))
+
+    let of_in_channel_exn ?nln chan =
+      of_decoder_exn ~decoder:(Uutf.decoder ?nln ~encoding:`UTF_8 (`Channel chan))
+
+    let of_in_channel_replacing ?nln chan =
+      of_decoder_replacing ~decoder:(Uutf.decoder ?nln ~encoding:`UTF_8 (`Channel chan))
+  end
+end
