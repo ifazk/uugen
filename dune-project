@@ -14,7 +14,7 @@
  (synopsis "Generators for uutf and uuseg")
  (description "Convert uutf and uuseg decoders into generators")
  (depends
-  (dune (and :build (> 1.10)))
+  (dune (and :build (>= 1.10)))
   uutf
   uuseg
   gen

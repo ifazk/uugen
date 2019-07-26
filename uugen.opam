@@ -17,7 +17,7 @@ dev-repo: "git+https://github.com/ifazk/uugen.git"
 synopsis: "Generators for uutf and uuseg"
 description: "Convert uutf and uuseg decoders into generators"
 depends: [
-  "dune" {build & > "1.10"}
+  "dune" {build & >= "1.10"}
   "uutf"
   "uuseg"
   "gen"
